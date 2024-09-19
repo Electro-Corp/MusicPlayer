@@ -1,8 +1,16 @@
 #ifndef MUSICPLAYER_H
 #define MUSICPLAYER_H
 
+#include "qgraphicsscene.h"
 #include <QMainWindow>
 #include <QStringListModel>
+#include <QListWidgetItem>
+#include <QMediaPlayer>
+#include <QAudioOutput>
+#include <QMediaMetaData>
+#include <QFile>
+#include <QThread>
+#include <QGraphicsVideoItem>
 
 #include <filesystem>
 
@@ -25,9 +33,20 @@ public:
 
     void loadMusic();
 
+public slots:
+    void songSelect(QListWidgetItem* cur, QListWidgetItem* prev);
+
+    void songPosChange(qint64 pos);
+
 private:
     Ui::MusicPlayer *ui;
 
     std::string musicLibraryPath;
+
+    QMediaPlayer* player;
+    QAudioOutput* audOut;
+
+    QGraphicsScene* scene;
+    QGraphicsVideoItem* videoItem;
 };
 #endif // MUSICPLAYER_H

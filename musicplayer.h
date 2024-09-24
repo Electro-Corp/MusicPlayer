@@ -11,6 +11,8 @@
 #include <QFile>
 #include <QThread>
 #include <QGraphicsVideoItem>
+#include <QVideoSink>
+#include <QVideoFrame>
 
 #include <filesystem>
 
@@ -38,6 +40,12 @@ public slots:
 
     void songPosChange(qint64 pos);
 
+    void songVolChange();
+
+    void vidChange(const QVideoFrame &frame);
+
+    void timeBarChanged();
+
 private:
     Ui::MusicPlayer *ui;
 
@@ -48,5 +56,6 @@ private:
 
     QGraphicsScene* scene;
     QGraphicsVideoItem* videoItem;
+    QVideoSink* sink;
 };
 #endif // MUSICPLAYER_H
